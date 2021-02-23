@@ -6,8 +6,8 @@ if [ "$EUID" -ne 0 ]
   exit
 else
   echo "Run as root user"
-
-  #jdk insall
+  
+  #JDK Install
   if rpm -qa | grep jdk ; then
     echo "Java installed."
   else
@@ -18,7 +18,7 @@ else
     echo -e "export PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile
   fi
 
-  #tomcat insall
+  #Tomcat Install
   TOMCAT_PATH=/home/hansj
 
   echo -e "Please input Tomcat install Path(Enter if you don't want to): c "
@@ -33,11 +33,11 @@ else
   tar xzf apache-tomcat-8.5.9.tar.gz
   echo -e "export CATALINA_HOME=$TOMCAT_PATH/apache-tomcat-8.5.9" >> /etc/profile
 
-  #port_check
+  #Current Tomcat Port Output
   NOW_TOMCAT_PORT=`echo syslog12 | sed -n '69p' $TOMCAT_PATH/apache-tomcat-8.5.9/conf/server.xml | sed 's/protocol.*$//' | sed 's/[^0-9{4}]//g'`
   echo "The current port is $NOW_TOMCAT_PORT"
 
-  #port_change
+  #Change to user-entered port
   echo -e "Please input Tomcat Port: c "
   read  tomcatPort
 
@@ -50,7 +50,7 @@ else
     echo "TOMCAT PORT IS CHANGED"
   fi
 
-  #firewarll
+  #Turn off firewall for port
   firewall-cmd --permanent --zone=public --add-port=$tomcatPort/tcp
   firewall-cmd --reload
   firewall-cmd --permanent --list-all
