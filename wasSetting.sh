@@ -21,7 +21,7 @@ else
   #Tomcat Install
   TOMCAT_PATH=/home/hansj
 
-  echo -e "Please input Tomcat install Path(Enter if you don't want to): c "
+  echo "Please input Tomcat install Path(Enter if you don't want to): c "
   read tempTomcatPath
 
   if [ ! -z $tempTomcatPath ]; then
@@ -38,7 +38,7 @@ else
   echo "The current port is $NOW_TOMCAT_PORT"
 
   #Change to user-entered port
-  echo -e "Please input Tomcat Port: c "
+  echo "Please input Tomcat Port: c "
   read  tomcatPort
 
   STAT=`netstat -na | grep $tomcatPort`
